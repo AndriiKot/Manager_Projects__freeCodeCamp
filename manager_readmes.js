@@ -1,4 +1,15 @@
 (async () => {
+  "use strict";
+
+  const fs = require("node:fs");
+  const path = require("node:path");
+  const config = require("./config");
+  const technologiesDocsLinks = require("./technologies/docs_links.json");
+  const technologiesSvg = require("./technologies/technologies_svg.json");
+
+  // ParserFreeCodeCamp
+  const puppeteer = require("puppeteer");
+
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
   await page.goto(
@@ -17,17 +28,6 @@
   writeTitle(description);
   let last_description_task = readDescriptionTask();
   cleanText(last_description_task);
-
-  ("use strict");
-
-  const fs = require("node:fs");
-  const path = require("node:path");
-  const config = require("./config");
-  const technologiesDocsLinks = require("./technologies/docs_links.json");
-  const technologiesSvg = require("./technologies/technologies_svg.json");
-
-  // ParserFreeCodeCamp
-  const puppeteer = require("puppeteer");
 
   function writeTitle(newContent) {
     try {
