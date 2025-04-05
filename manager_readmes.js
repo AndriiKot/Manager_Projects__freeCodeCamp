@@ -5,6 +5,7 @@ const path = require("node:path");
 const config = require("./config");
 const technologiesDocsLinks = require("./technologies/docs_links.json");
 const technologiesSvg = require("./technologies/technologies_svg.json");
+let last_description_task = "";
 
 // ParserFreeCodeCamp
 const puppeteer = require("puppeteer");
@@ -37,7 +38,7 @@ function writeTitle(newContent) {
   );
 
   writeTitle(description);
-  const last_description_task = readDescriptionTask();
+  last_description_task = readDescriptionTask();
   cleanText(last_description_task);
 
   await browser.close();
