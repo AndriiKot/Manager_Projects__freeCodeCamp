@@ -29,17 +29,6 @@
   let last_description_task = readDescriptionTask();
   cleanText(last_description_task);
 
-  function writeTitle(newContent) {
-    try {
-      fs.writeFileSync(path.join(LAST_STEP_PATH, "title.txt"), newContent, {
-        flag: "w",
-      });
-      console.log("Successfully wrote new content to 'title.txt' file.");
-    } catch (err) {
-      console.error("Error occurred while writing to 'title.txt' file:", err);
-    }
-  }
-
   await browser.close();
   const folderSteps = "steps";
 
@@ -102,6 +91,16 @@
     }
 
     return cleanedText;
+  }
+  function writeTitle(newContent) {
+    try {
+      fs.writeFileSync(path.join(LAST_STEP_PATH, "title.txt"), newContent, {
+        flag: "w",
+      });
+      console.log("Successfully wrote new content to 'title.txt' file.");
+    } catch (err) {
+      console.error("Error occurred while writing to 'title.txt' file:", err);
+    }
   }
 
   function getNumberStep(folder) {
