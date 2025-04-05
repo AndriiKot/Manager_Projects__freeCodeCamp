@@ -7,7 +7,6 @@
   const technologiesDocsLinks = require("./technologies/docs_links.json");
   const technologiesSvg = require("./technologies/technologies_svg.json");
 
-  // ParserFreeCodeCamp
   const puppeteer = require("puppeteer");
 
   const browser = await puppeteer.launch();
