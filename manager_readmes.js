@@ -25,10 +25,6 @@
     (element) => element.outerHTML
   );
 
-  writeTitle(description);
-  let last_description_task = readDescriptionTask();
-  cleanText(last_description_task);
-
   await browser.close();
   const folderSteps = "steps";
 
@@ -48,6 +44,10 @@
   const base_url_technologies = config.BASE_URL_TECHNOLOGIES;
 
   const table = generateTable(base_url, getFolders(folderSteps), 5);
+
+  writeTitle(description);
+  let last_description_task = readDescriptionTask();
+  cleanText(last_description_task);
 
   function getLastFolderStep(folders) {
     return folders.at(-1);
