@@ -1,26 +1,3 @@
-"use strict";
-
-const fs = require("node:fs");
-const path = require("node:path");
-const config = require("./config");
-const technologiesDocsLinks = require("./technologies/docs_links.json");
-const technologiesSvg = require("./technologies/technologies_svg.json");
-let last_description_task = "";
-
-// ParserFreeCodeCamp
-const puppeteer = require("puppeteer");
-
-function writeTitle(newContent) {
-  try {
-    fs.writeFileSync(path.join(LAST_STEP_PATH, "title.txt"), newContent, {
-      flag: "w",
-    });
-    console.log("Successfully wrote new content to 'title.txt' file.");
-  } catch (err) {
-    console.error("Error occurred while writing to 'title.txt' file:", err);
-  }
-}
-
 (async () => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
@@ -38,12 +15,32 @@ function writeTitle(newContent) {
   );
 
   writeTitle(description);
-  last_description_task = readDescriptionTask();
+  let last_description_task = readDescriptionTask();
   cleanText(last_description_task);
 
+  ("use strict");
+
+  const fs = require("node:fs");
+  const path = require("node:path");
+  const config = require("./config");
+  const technologiesDocsLinks = require("./technologies/docs_links.json");
+  const technologiesSvg = require("./technologies/technologies_svg.json");
+
+  // ParserFreeCodeCamp
+  const puppeteer = require("puppeteer");
+
+  function writeTitle(newContent) {
+    try {
+      fs.writeFileSync(path.join(LAST_STEP_PATH, "title.txt"), newContent, {
+        flag: "w",
+      });
+      console.log("Successfully wrote new content to 'title.txt' file.");
+    } catch (err) {
+      console.error("Error occurred while writing to 'title.txt' file:", err);
+    }
+  }
+
   await browser.close();
-})();
-(async () => {
   const folderSteps = "steps";
 
   const folderImagesPreviews = "images/previews";
