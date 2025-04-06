@@ -23,7 +23,6 @@ const back_to_top = config.back_to_top_page;
 const base_url = config.BASE_URL;
 const base_url_technologies = config.BASE_URL_TECHNOLOGIES;
 
-
 function writeTitle(newContent) {
   try {
     fs.writeFile(path.join(LAST_STEP_PATH, "title.txt"), newContent, {
@@ -56,8 +55,35 @@ function writeTitle(newContent) {
   const title = cleanText(last_description_task);
   await writeTitle(title);
 
-})();
+  const README_MAIN = [
+    top_page,
+    topic,
+    generateDetailsTemplate("Follow Links Steps", table),
+    generateImagePreview(base_url, 4, getFiles(folderImagesPreviews).at(-1)),
+    back_to_top,
+    generateTableTechnologies(config.TECHNOLOGIES, 33, 100, 100, 100),
+    back_to_top,
+    generateCodesProject(),
+  ];
 
+  const README_STEP = [
+    top_page,
+    topic,
+    generateDetailsTemplate("Follow Links Steps", table),
+    generateDetailsTemplate(
+      "Description of the Task",
+      `${getNumberStep(LAST_STEP_FOLDER)}\n\n${last_description_task}`
+    ),
+    generateImagePreview(base_url, 4, getFiles(folderImagesPreviews).at(-1)),
+    back_to_top,
+    generateTableTechnologies(config.TECHNOLOGIES, 33, 100, 100, 100),
+    back_to_top,
+    generateCodesProject(),
+  ];
+  createReadmeFile(MAIN_PATH, README_MAIN);
+  createReadmeFile(STEPS_PATH, README_MAIN);
+  createReadmeFile(LAST_STEP_PATH, README_STEP);
+})();
 
 const table = generateTable(base_url, getFolders(folderSteps), 5);
 
@@ -84,14 +110,6 @@ async function readDescriptionTask() {
   }
 }
 
-function parseFileTitle(newContent) {
-  try {
-    fs.writeFileSync(path.join(LAST_STEP_PATH, "title.txt"), newContent);
-    console.log("File 'title.txt' has been overwritten.");
-  } catch (err) {
-    console.error("Error writing file:", err);
-  }
-}
 function cleanText(text) {
   const regex = /<[^>]+>/g;
 
@@ -150,32 +168,6 @@ function generateCodesProject() {
   });
   return stringCodesProject;
 }
-
-const README_MAIN = [
-  top_page,
-  topic,
-  generateDetailsTemplate("Follow Links Steps", table),
-  generateImagePreview(base_url, 4, getFiles(folderImagesPreviews).at(-1)),
-  back_to_top,
-  generateTableTechnologies(config.TECHNOLOGIES, 33, 100, 100, 100),
-  back_to_top,
-  generateCodesProject(),
-];
-
-const README_STEP = [
-  top_page,
-  topic,
-  generateDetailsTemplate("Follow Links Steps", table),
-  generateDetailsTemplate(
-    "Description of the Task",
-    `${getNumberStep(LAST_STEP_FOLDER)}\n\n${last_description_task}`
-  ),
-  generateImagePreview(base_url, 4, getFiles(folderImagesPreviews).at(-1)),
-  back_to_top,
-  generateTableTechnologies(config.TECHNOLOGIES, 33, 100, 100, 100),
-  back_to_top,
-  generateCodesProject(),
-];
 
 function generateImagePreview(base_url, header_level, imageName) {
   const alt = imageName.replace(/\.[^.]*$/g, "");
@@ -325,8 +317,3 @@ function createReadmeFile(directoryPath, template) {
     console.error("Error creating/updating README.md file:", err);
   }
 }
-
-parseFileTitle(title);
-createReadmeFile(MAIN_PATH, README_MAIN);
-createReadmeFile(STEPS_PATH, README_MAIN);
-createReadmeFile(LAST_STEP_PATH, README_STEP);
