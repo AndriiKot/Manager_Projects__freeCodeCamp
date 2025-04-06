@@ -5,9 +5,68 @@ const path = require("node:path");
 const config = require("./config");
 const technologiesDocsLinks = require("./technologies/docs_links.json");
 const technologiesSvg = require("./technologies/technologies_svg.json");
+
+// ParserFreeCodeCamp
 const puppeteer = require("puppeteer");
 
+function writeTitle(newContent) {
+  try {
+    fs.writeFileSync(path.join(LAST_STEP_PATH, "title.txt"), newContent, {
+      flag: "w",
+    });
+    console.log("Successfully wrote new content to 'title.txt' file.");
+  } catch (err) {
+    console.error("Error occurred while writing to 'title.txt' file:", err);
+  }
+}
+
+(async () => {
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
+  await page.goto(
+    path.join(
+      config.BASE_URL_PROJECT,
+      `/step-${getNumberStep(LAST_STEP_FOLDER)}`
+    )
+  );
+  console.log(createNumberStepHeader(LAST_STEP_FOLDER));
+
+  // Wait for the element to appear
+  await page.waitForSelector("#description", { timeout: 10000 });
+
+  // Get the content of the element with ID "description"
+  const description = await page.$eval(
+    "#description",
+    (element) => element.outerHTML
+  );
+  await browser.close();
+
+  console.log(description);
+  writeTitle(description);
+
+  const last_description_task = readDescriptionTask();
+  const title = cleanText(last_description_task);
+
+  const README_STEP = [
+    top_page,
+    topic,
+    generateDetailsTemplate("Follow Links Steps", table),
+    generateDetailsTemplate(
+      "Description of the Task",
+      `${createNumberStepHeader(LAST_STEP_FOLDER)}\n\n${last_description_task}`
+    ),
+    generateImagePreview(base_url, 4, getFiles(folderImagesPreviews).at(-1)),
+    back_to_top,
+    generateTableTechnologies(config.TECHNOLOGIES, 33, 100, 100, 100),
+    back_to_top,
+    generateCodesProject(),
+  ];
+  parseFileTitle(title);
+  createReadmeFile(LAST_STEP_PATH, README_STEP);
+})();
+
 const folderSteps = "steps";
+
 const folderImagesPreviews = "images/previews";
 const urlBlod = `/blob/${config.BRANCH}`;
 
@@ -23,93 +82,34 @@ const back_to_top = config.back_to_top_page;
 const base_url = config.BASE_URL;
 const base_url_technologies = config.BASE_URL_TECHNOLOGIES;
 
-function writeTitle(newContent) {
-  try {
-    fs.writeFile(path.join(LAST_STEP_PATH, "title.txt"), newContent, {
-      flag: "w",
-    });
-    console.log("Successfully wrote new content to 'title.txt' file.");
-  } catch (err) {
-    console.error("Error occurred while writing to 'title.txt' file:", err);
-  }
-}
-
-(async () => {
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
-  await page.goto(
-    "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures-v8/learn-form-validation-by-building-a-calorie-counter/step-19"
-  );
-
-  // Wait for the element to appear
-  await page.waitForSelector("#description", { timeout: 10000 });
-
-  // Get the content of the element with ID "description"
-  const description = await page.$eval(
-    "#description",
-    (element) => element.outerHTML
-  );
-  await browser.close();
-  await writeTitle(description);
-  const last_description_task = await readDescriptionTask();
-  const title = cleanText(last_description_task);
-  await writeTitle(title);
-
-  const README_MAIN = [
-    top_page,
-    topic,
-    generateDetailsTemplate("Follow Links Steps", table),
-    generateImagePreview(base_url, 4, getFiles(folderImagesPreviews).at(-1)),
-    back_to_top,
-    generateTableTechnologies(config.TECHNOLOGIES, 33, 100, 100, 100),
-    back_to_top,
-    generateCodesProject(),
-  ];
-
-  const README_STEP = [
-    top_page,
-    topic,
-    generateDetailsTemplate("Follow Links Steps", table),
-    generateDetailsTemplate(
-      "Description of the Task",
-      `${getNumberStep(LAST_STEP_FOLDER)}\n\n${last_description_task}`
-    ),
-    generateImagePreview(base_url, 4, getFiles(folderImagesPreviews).at(-1)),
-    back_to_top,
-    generateTableTechnologies(config.TECHNOLOGIES, 33, 100, 100, 100),
-    back_to_top,
-    generateCodesProject(),
-  ];
-  createReadmeFile(MAIN_PATH, README_MAIN);
-  createReadmeFile(STEPS_PATH, README_MAIN);
-  createReadmeFile(LAST_STEP_PATH, README_STEP);
-})();
-
 const table = generateTable(base_url, getFolders(folderSteps), 5);
 
 function getLastFolderStep(folders) {
   return folders.at(-1);
 }
 
-async function readDescriptionTask() {
-  try {
-    const data = await fs.promises.readFile(
-      path.join(LAST_STEP_PATH, "title.txt"),
-      "utf8"
-    );
-    const text = data.replace(' id="description"', "");
-    const regex = /<[^>]+>/g;
+function readDescriptionTask() {
+  let task = fs.readFileSync(path.join(LAST_STEP_PATH, "title.txt"), {
+    encoding: "utf8",
+  });
+  const text = task.replace(' id="description"', "");
+  const regex = /<[^>]+>/g;
 
-    if (!regex.test(text)) {
-      return "";
-    } else {
-      return text.trim();
-    }
-  } catch (err) {
-    throw err;
+  if (!regex.test(text)) {
+    return "";
   }
+
+  return text.trim();
 }
 
+function parseFileTitle(newContent) {
+  try {
+    fs.writeFileSync(path.join(LAST_STEP_PATH, "title.txt"), newContent);
+    console.log("File 'title.txt' has been overwritten.");
+  } catch (err) {
+    console.error("Error writing file:", err);
+  }
+}
 function cleanText(text) {
   const regex = /<[^>]+>/g;
 
@@ -118,7 +118,7 @@ function cleanText(text) {
   }
 
   if (!text.startsWith("Step")) {
-    text = getNumberStep(LAST_STEP_FOLDER) + "\n" + text;
+    text = createNumberStepHeader(LAST_STEP_FOLDER) + "\n" + text;
   }
 
   text = text.replace(/<[^>]+>/g, "");
@@ -142,6 +142,10 @@ function cleanText(text) {
 }
 
 function getNumberStep(folder) {
+  return folder.replace(/\D/g, "");
+}
+
+function createNumberStepHeader(folder) {
   return `<h3>Step  ${+folder.replace(/\D/g, "")}</h3>`;
 }
 
@@ -168,6 +172,17 @@ function generateCodesProject() {
   });
   return stringCodesProject;
 }
+
+const README_MAIN = [
+  top_page,
+  topic,
+  generateDetailsTemplate("Follow Links Steps", table),
+  generateImagePreview(base_url, 4, getFiles(folderImagesPreviews).at(-1)),
+  back_to_top,
+  generateTableTechnologies(config.TECHNOLOGIES, 33, 100, 100, 100),
+  back_to_top,
+  generateCodesProject(),
+];
 
 function generateImagePreview(base_url, header_level, imageName) {
   const alt = imageName.replace(/\.[^.]*$/g, "");
@@ -317,3 +332,6 @@ function createReadmeFile(directoryPath, template) {
     console.error("Error creating/updating README.md file:", err);
   }
 }
+
+createReadmeFile(MAIN_PATH, README_MAIN);
+createReadmeFile(STEPS_PATH, README_MAIN);
