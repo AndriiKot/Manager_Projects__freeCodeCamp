@@ -32,7 +32,7 @@ function writeTitle(newContent) {
   console.log(createNumberStepHeader(LAST_STEP_FOLDER));
 
   // Wait for the element to appear
-  await page.waitForSelector("#description", { timeout: 10000 });
+  await page.waitForSelector("#description");
 
   // Get the content of the element with ID "description"
   const description = await page.$eval(
