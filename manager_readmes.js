@@ -5,13 +5,28 @@ const path = require("node:path");
 const config = require("./config");
 const technologiesDocsLinks = require("./technologies/docs_links.json");
 const technologiesSvg = require("./technologies/technologies_svg.json");
-
-// ParserFreeCodeCamp
 const puppeteer = require("puppeteer");
+
+const folderSteps = "steps";
+const folderImagesPreviews = "images/previews";
+const urlBlod = `/blob/${config.BRANCH}`;
+
+const STEPS = getFolders(folderSteps);
+const LAST_STEP_FOLDER = getLastFolderStep(STEPS);
+const MAIN_PATH = path.join(__dirname, "..", "..");
+const STEPS_PATH = path.join(MAIN_PATH, "steps");
+const LAST_STEP_PATH = path.join(STEPS_PATH, LAST_STEP_FOLDER);
+
+const topic = config.README_TOPIC;
+const top_page = config.top_page;
+const back_to_top = config.back_to_top_page;
+const base_url = config.BASE_URL;
+const base_url_technologies = config.BASE_URL_TECHNOLOGIES;
+
 
 function writeTitle(newContent) {
   try {
-    fs.writeFileSync(path.join(LAST_STEP_PATH, "title.txt"), newContent, {
+    fs.writeFile(path.join(LAST_STEP_PATH, "title.txt"), newContent, {
       flag: "w",
     });
     console.log("Successfully wrote new content to 'title.txt' file.");
@@ -35,30 +50,14 @@ function writeTitle(newContent) {
     "#description",
     (element) => element.outerHTML
   );
-  console.log(description);
-  writeTitle(description);
-
   await browser.close();
+  await writeTitle(description);
+  const last_description_task = await readDescriptionTask();
+  const title = cleanText(last_description_task);
+  await writeTitle(title);
+
 })();
 
-const folderSteps = "steps";
-
-const folderImagesPreviews = "images/previews";
-const urlBlod = `/blob/${config.BRANCH}`;
-
-const STEPS = getFolders(folderSteps);
-const LAST_STEP_FOLDER = getLastFolderStep(STEPS);
-const MAIN_PATH = path.join(__dirname, "..", "..");
-const STEPS_PATH = path.join(MAIN_PATH, "steps");
-const LAST_STEP_PATH = path.join(STEPS_PATH, LAST_STEP_FOLDER);
-
-const topic = config.README_TOPIC;
-const top_page = config.top_page;
-const back_to_top = config.back_to_top_page;
-const base_url = config.BASE_URL;
-const base_url_technologies = config.BASE_URL_TECHNOLOGIES;
-const last_description_task = readDescriptionTask();
-const title = cleanText(last_description_task);
 
 const table = generateTable(base_url, getFolders(folderSteps), 5);
 
@@ -66,18 +65,23 @@ function getLastFolderStep(folders) {
   return folders.at(-1);
 }
 
-function readDescriptionTask() {
-  let task = fs.readFileSync(path.join(LAST_STEP_PATH, "title.txt"), {
-    encoding: "utf8",
-  });
-  const text = task.replace(' id="description"', "");
-  const regex = /<[^>]+>/g;
+async function readDescriptionTask() {
+  try {
+    const data = await fs.promises.readFile(
+      path.join(LAST_STEP_PATH, "title.txt"),
+      "utf8"
+    );
+    const text = data.replace(' id="description"', "");
+    const regex = /<[^>]+>/g;
 
-  if (!regex.test(text)) {
-    return "";
+    if (!regex.test(text)) {
+      return "";
+    } else {
+      return text.trim();
+    }
+  } catch (err) {
+    throw err;
   }
-
-  return text.trim();
 }
 
 function parseFileTitle(newContent) {
