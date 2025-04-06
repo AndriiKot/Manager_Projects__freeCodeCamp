@@ -6,6 +6,16 @@ const config = require("./config");
 const technologiesDocsLinks = require("./technologies/docs_links.json");
 const technologiesSvg = require("./technologies/technologies_svg.json");
 
+const util = require('node:util');
+const exec = util.promisify(require('node:child_process').exec);
+
+async function gitAddAll() {
+  const { stdout, stderr } = await exec('git add .');
+  console.log('stdout:', stdout);
+  console.error('stderr:', stderr);
+}
+
+
 // ParserFreeCodeCamp
 const puppeteer = require("puppeteer");
 
@@ -335,3 +345,4 @@ function createReadmeFile(directoryPath, template) {
 
 createReadmeFile(MAIN_PATH, README_MAIN);
 createReadmeFile(STEPS_PATH, README_MAIN);
+gitAddAll();
