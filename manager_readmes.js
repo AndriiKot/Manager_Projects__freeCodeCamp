@@ -29,11 +29,10 @@ function writeTitle(newContent) {
       `/step-${getNumberStep(LAST_STEP_FOLDER)}`
     )
   );
-  console.log(createNumberStepHeader(LAST_STEP_FOLDER));
 
   // Wait for the element to appear
   await page.waitForSelector("#description");
-
+1
   // Get the content of the element with ID "description"
   const description = await page.$eval(
     "#description",
