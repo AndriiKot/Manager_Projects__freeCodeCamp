@@ -1,13 +1,46 @@
 
 <a id=top></a>
 
-# Building a Calorie Counter
+# Manager_Projects__freeCodeCamp
+
+This project is designed to help create professional README.md files with descriptions of projects or courses from freeCodeCamp. The project is created for the automation of freeCodeCamp projects and courses, specifically the formatting of the README.md file on the course's main page, as well as the creation of a README.md file for each lesson. All of this is done in an automated format as you progress through the course, and the git hooks pre-commit script is triggered with each commit after completing a lesson.
+
+The "Manager_Projects__freeCodeCamp" project is connected to the course repository as a submodule.
+
+## Features
+
+- Automated creation of README.md files for each lesson in a course
+- Formatting of the README.md file on the course's main page
+- Integration with git hooks to trigger the script on each commit after completing a lesson
+- Submodule integration with the course repository
+
+[back to top](#top)
+
+## Usage
+
+To use the "Manager_Projects__freeCodeCamp" project, follow these steps:
+
+1. Clone the course repository and the "Manager_Projects__freeCodeCamp" project as a submodule.
+2. Set up the git hooks to trigger the script on each commit after completing a lesson.
+3. As you progress through the course, the script will automatically create and format the README.md files for each lesson and the course's main page.
+
+## Contributing
+
+If you would like to contribute to the "Manager_Projects__freeCodeCamp" project, please feel free to submit a pull request or open an issue.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+[back to top](#top)
+
+## EXAMPLE course Building a Calorie Counter
 
 <details>
       <summary>
         <h4>Follow Links Steps</h4>
       </summary>
-       
+
 <table>
   <thead>
     <tr><th><a href="https://github.com/AndriiKot/JS__Validation_by_Building_a_Calorie_Counter__freeCodeCamp//tree/main/steps/__00__title_" target="_self">Step 0</a></th><th><a href="https://github.com/AndriiKot/JS__Validation_by_Building_a_Calorie_Counter__freeCodeCamp//tree/main/steps/__01__step__" target="_self">Step 1</a></th><th><a href="https://github.com/AndriiKot/JS__Validation_by_Building_a_Calorie_Counter__freeCodeCamp//tree/main/steps/__02__step__" target="_self">Step 2</a></th><th><a href="https://github.com/AndriiKot/JS__Validation_by_Building_a_Calorie_Counter__freeCodeCamp//tree/main/steps/__03__step__" target="_self">Step 3</a></th><th><a href="https://github.com/AndriiKot/JS__Validation_by_Building_a_Calorie_Counter__freeCodeCamp//tree/main/steps/__04__step__" target="_self">Step 4</a></th><tr><th><a href="https://github.com/AndriiKot/JS__Validation_by_Building_a_Calorie_Counter__freeCodeCamp//tree/main/steps/__05__step__" target="_self">Step 5</a></th><th><a href="https://github.com/AndriiKot/JS__Validation_by_Building_a_Calorie_Counter__freeCodeCamp//tree/main/steps/__06__step__" target="_self">Step 6</a></th><th><a href="https://github.com/AndriiKot/JS__Validation_by_Building_a_Calorie_Counter__freeCodeCamp//tree/main/steps/__07__step__" target="_self">Step 7</a></th><th><a href="https://github.com/AndriiKot/JS__Validation_by_Building_a_Calorie_Counter__freeCodeCamp//tree/main/steps/__08__step__" target="_self">Step 8</a></th><th><a href="https://github.com/AndriiKot/JS__Validation_by_Building_a_Calorie_Counter__freeCodeCamp//tree/main/steps/__09__step__" target="_self">Step 9</a></th><tr><th><a href="https://github.com/AndriiKot/JS__Validation_by_Building_a_Calorie_Counter__freeCodeCamp//tree/main/steps/__10__step__" target="_self">Step 10</a></th><th><a href="https://github.com/AndriiKot/JS__Validation_by_Building_a_Calorie_Counter__freeCodeCamp//tree/main/steps/__11__step__" target="_self">Step 11</a></th><th><a href="https://github.com/AndriiKot/JS__Validation_by_Building_a_Calorie_Counter__freeCodeCamp//tree/main/steps/__12__step__" target="_self">Step 12</a></th><th><a href="https://github.com/AndriiKot/JS__Validation_by_Building_a_Calorie_Counter__freeCodeCamp//tree/main/steps/__13__step__" target="_self">Step 13</a></th><th><a href="https://github.com/AndriiKot/JS__Validation_by_Building_a_Calorie_Counter__freeCodeCamp//tree/main/steps/__14__step__" target="_self">Step 14</a></th><tr><th><a href="https://github.com/AndriiKot/JS__Validation_by_Building_a_Calorie_Counter__freeCodeCamp//tree/main/steps/__15__step__" target="_self">Step 15</a></th><th><a href="https://github.com/AndriiKot/JS__Validation_by_Building_a_Calorie_Counter__freeCodeCamp//tree/main/steps/__16__step__" target="_self">Step 16</a></th><th><a href="https://github.com/AndriiKot/JS__Validation_by_Building_a_Calorie_Counter__freeCodeCamp//tree/main/steps/__17__step__" target="_self">Step 17</a></th><th><a href="https://github.com/AndriiKot/JS__Validation_by_Building_a_Calorie_Counter__freeCodeCamp//tree/main/steps/__18__step__" target="_self">Step 18</a></th><th><a href="https://github.com/AndriiKot/JS__Validation_by_Building_a_Calorie_Counter__freeCodeCamp//tree/main/steps/__19__step__" target="_self">Step 19</a></th><tr><th><a href="https://github.com/AndriiKot/JS__Validation_by_Building_a_Calorie_Counter__freeCodeCamp//tree/main/steps/__20__step__" target="_self">Step 20</a></th><th><a href="https://github.com/AndriiKot/JS__Validation_by_Building_a_Calorie_Counter__freeCodeCamp//tree/main/steps/__21__step__" target="_self">Step 21</a></th><th><a href="https://github.com/AndriiKot/JS__Validation_by_Building_a_Calorie_Counter__freeCodeCamp//tree/main/steps/__22__step__" target="_self">Step 22</a></th><th><a href="https://github.com/AndriiKot/JS__Validation_by_Building_a_Calorie_Counter__freeCodeCamp//tree/main/steps/__23__step__" target="_self">Step 23</a></th><th><a href="https://github.com/AndriiKot/JS__Validation_by_Building_a_Calorie_Counter__freeCodeCamp//tree/main/steps/__24__step__" target="_self">Step 24</a></th><tr><th><a href="https://github.com/AndriiKot/JS__Validation_by_Building_a_Calorie_Counter__freeCodeCamp//tree/main/steps/__25__step__" target="_self">Step 25</a></th><th><a href="https://github.com/AndriiKot/JS__Validation_by_Building_a_Calorie_Counter__freeCodeCamp//tree/main/steps/__26__step__" target="_self">Step 26</a></th><th><a href="https://github.com/AndriiKot/JS__Validation_by_Building_a_Calorie_Counter__freeCodeCamp//tree/main/steps/__27__step__" target="_self">Step 27</a></th><th><a href="https://github.com/AndriiKot/JS__Validation_by_Building_a_Calorie_Counter__freeCodeCamp//tree/main/steps/__28__step__" target="_self">Step 28</a></th><th><a href="https://github.com/AndriiKot/JS__Validation_by_Building_a_Calorie_Counter__freeCodeCamp//tree/main/steps/__29__step__" target="_self">Step 29</a></th></tr>
@@ -19,7 +52,7 @@
 
 <h4>preview</h4>
     <img src="https://github.com/AndriiKot/JS__Validation_by_Building_a_Calorie_Counter__freeCodeCamp/blob/main/images/previews/preview_step29.png" alt="preview_step29">
-  
+
 
 [back to top](#top)
 
