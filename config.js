@@ -11,6 +11,7 @@ const README_CONFIG = {
   BRANCH: "main",
   BASE_URL_TECHNOLOGIES:
     "https://github.com/AndriiKot/iconsSVG_and_linksDocs/blob/main/svg/",
+  BASE_URL_PROJECT: "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures-v8/learn-form-validation-by-building-a-calorie-counter/",
 };
 
 module.exports = README_CONFIG;

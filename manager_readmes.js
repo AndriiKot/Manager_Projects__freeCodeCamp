@@ -6,7 +6,66 @@ const config = require("./config");
 const technologiesDocsLinks = require("./technologies/docs_links.json");
 const technologiesSvg = require("./technologies/technologies_svg.json");
 
+// ParserFreeCodeCamp
+const puppeteer = require("puppeteer");
+
+function writeTitle(newContent) {
+  try {
+    fs.writeFileSync(path.join(LAST_STEP_PATH, "title.txt"), newContent, {
+      flag: "w",
+    });
+    console.log("Successfully wrote new content to 'title.txt' file.");
+  } catch (err) {
+    console.error("Error occurred while writing to 'title.txt' file:", err);
+  }
+}
+
+(async () => {
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
+  await page.goto(
+    path.join(
+      config.BASE_URL_PROJECT,
+      `/step-${getNumberStep(LAST_STEP_FOLDER)}`
+    )
+  );
+
+  // Wait for the element to appear
+  await page.waitForSelector("#description");
+1
+  // Get the content of the element with ID "description"
+  const description = await page.$eval(
+    "#description",
+    (element) => element.outerHTML
+  );
+  await browser.close();
+
+  console.log(description);
+  writeTitle(description);
+
+  const last_description_task = readDescriptionTask();
+  const title = cleanText(last_description_task);
+
+  const README_STEP = [
+    top_page,
+    topic,
+    generateDetailsTemplate("Follow Links Steps", table),
+    generateDetailsTemplate(
+      "Description of the Task",
+      `${createNumberStepHeader(LAST_STEP_FOLDER)}\n\n${last_description_task}`
+    ),
+    generateImagePreview(base_url, 4, getFiles(folderImagesPreviews).at(-1)),
+    back_to_top,
+    generateTableTechnologies(config.TECHNOLOGIES, 33, 100, 100, 100),
+    back_to_top,
+    generateCodesProject(),
+  ];
+  parseFileTitle(title);
+  createReadmeFile(LAST_STEP_PATH, README_STEP);
+})();
+
 const folderSteps = "steps";
+
 const folderImagesPreviews = "images/previews";
 const urlBlod = `/blob/${config.BRANCH}`;
 
@@ -21,8 +80,6 @@ const top_page = config.top_page;
 const back_to_top = config.back_to_top_page;
 const base_url = config.BASE_URL;
 const base_url_technologies = config.BASE_URL_TECHNOLOGIES;
-const last_description_task = readDescriptionTask();
-const title = cleanText(last_description_task);
 
 const table = generateTable(base_url, getFolders(folderSteps), 5);
 
@@ -53,13 +110,14 @@ function parseFileTitle(newContent) {
   }
 }
 function cleanText(text) {
-  if (!text.startsWith("Step")) {
-    text = getNumberStep(LAST_STEP_FOLDER) + "\n" + text;
-  }
   const regex = /<[^>]+>/g;
 
   if (!regex.test(text)) {
     return text;
+  }
+
+  if (!text.startsWith("Step")) {
+    text = createNumberStepHeader(LAST_STEP_FOLDER) + "\n" + text;
   }
 
   text = text.replace(/<[^>]+>/g, "");
@@ -83,6 +141,10 @@ function cleanText(text) {
 }
 
 function getNumberStep(folder) {
+  return folder.replace(/\D/g, "");
+}
+
+function createNumberStepHeader(folder) {
   return `<h3>Step  ${+folder.replace(/\D/g, "")}</h3>`;
 }
 
@@ -114,21 +176,6 @@ const README_MAIN = [
   top_page,
   topic,
   generateDetailsTemplate("Follow Links Steps", table),
-  generateImagePreview(base_url, 4, getFiles(folderImagesPreviews).at(-1)),
-  back_to_top,
-  generateTableTechnologies(config.TECHNOLOGIES, 33, 100, 100, 100),
-  back_to_top,
-  generateCodesProject(),
-];
-
-const README_STEP = [
-  top_page,
-  topic,
-  generateDetailsTemplate("Follow Links Steps", table),
-  generateDetailsTemplate(
-    "Description of the Task",
-    `${getNumberStep(LAST_STEP_FOLDER)}\n\n${last_description_task}`
-  ),
   generateImagePreview(base_url, 4, getFiles(folderImagesPreviews).at(-1)),
   back_to_top,
   generateTableTechnologies(config.TECHNOLOGIES, 33, 100, 100, 100),
@@ -285,7 +332,5 @@ function createReadmeFile(directoryPath, template) {
   }
 }
 
-parseFileTitle(title);
 createReadmeFile(MAIN_PATH, README_MAIN);
 createReadmeFile(STEPS_PATH, README_MAIN);
-createReadmeFile(LAST_STEP_PATH, README_STEP);
