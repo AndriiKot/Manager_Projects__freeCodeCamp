@@ -32,7 +32,7 @@ function writeTitle(newContent) {
 
   // Wait for the element to appear
   await page.waitForSelector("#description");
-1
+
   // Get the content of the element with ID "description"
   const description = await page.$eval(
     "#description",
