@@ -11,7 +11,7 @@ const README_CONFIG = {
   BRANCH: "main",
   BASE_URL_TECHNOLOGIES:
     "https://github.com/AndriiKot/iconsSVG_and_linksDocs/blob/main/svg/",
-  BASE_URL_PROJECT: "https://www.freecodecamp.org/learn/2022/responsive-web-design/#learn-css-grid-by-building-a-magazine/",
+  BASE_URL_PROJECT: "https://www.freecodecamp.org/learn/2022/responsive-web-design/learn-css-grid-by-building-a-magazine/",
 };
 
 module.exports = README_CONFIG;
