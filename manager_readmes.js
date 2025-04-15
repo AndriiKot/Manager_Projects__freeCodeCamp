@@ -26,7 +26,7 @@ function writeTitle(newContent) {
   await page.goto(
     path.join(
       config.BASE_URL_PROJECT,
-      `/step-${getNumberStep(LAST_STEP_FOLDER)}`
+     `step-${+getNumberStep(LAST_STEP_FOLDER)}`
     )
   );
 
