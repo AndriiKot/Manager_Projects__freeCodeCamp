@@ -4,7 +4,6 @@
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 0.6.x   | :x:                |
 | 1.0.x   | :white_check_mark: |
 
 ### Supported Node.js Versions
