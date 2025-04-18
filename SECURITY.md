@@ -10,7 +10,7 @@
 ### Supported Node.js Versions
 
 | Versrion | Supported         |
-| ________ | __________________|
+| ---------| ----------------- |
 | 22.x.x   | :white_check_mark:|
 | 23.x.x   | :x:               |
 
