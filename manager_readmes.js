@@ -55,7 +55,7 @@ function writeTitle(newContent) {
       `${createNumberStepHeader(LAST_STEP_FOLDER)}\n\n${last_description_task}`
     ),
     generateImagePreview(base_url, 4, getFiles(folderImagesPreviews).at(-1)),
-    back_to_top,
+//    back_to_top,
     generateTableTechnologies(config.TECHNOLOGIES, 33, 100, 100, 100),
     back_to_top,
     generateCodesProject(),
@@ -177,7 +177,7 @@ const README_MAIN = [
   topic,
   generateDetailsTemplate("Follow Links Steps", table),
   generateImagePreview(base_url, 4, getFiles(folderImagesPreviews).at(-1)),
-  back_to_top,
+//  back_to_top,
   generateTableTechnologies(config.TECHNOLOGIES, 33, 100, 100, 100),
   back_to_top,
   generateCodesProject(),
