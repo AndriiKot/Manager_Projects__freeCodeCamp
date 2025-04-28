@@ -1,8 +1,8 @@
 const README_CONFIG = {
   README_TOPIC: "\n# Cat Photo App\n",
-  TECHNOLOGIES: ["CSS", "HTML5"],
+  TECHNOLOGIES: ["HTML5"],
   LINKS_TO_DOCS_TECHNOLOGIES: "technologies/docs_links.json",
-  FILES: ["index.html", "styles.css"],
+  FILES: ["index.html"],
   top_page: "\n<a id=top></a>\n",
   back_to_top_page: "\n\n[back to top](#top)\n\n",
   PREVIEW: "../images/previews/",
