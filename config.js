@@ -1,5 +1,5 @@
 const README_CONFIG = {
-  README_TOPIC: "\n# Building a Magazine\n",
+  README_TOPIC: "\n# Cat Photo App\n",
   TECHNOLOGIES: ["CSS", "HTML5"],
   LINKS_TO_DOCS_TECHNOLOGIES: "technologies/docs_links.json",
   FILES: ["index.html", "styles.css"],
@@ -7,11 +7,11 @@ const README_CONFIG = {
   back_to_top_page: "\n\n[back to top](#top)\n\n",
   PREVIEW: "../images/previews/",
   BASE_URL:
-    "https://github.com/AndriiKot/Desing__CSS_Grid_by_Building_a_Magazine__freeCodeCamp/",
+    "https://github.com/AndriiKot/Desing___Cat_Photo_App___freeCodeCamp/",
   BRANCH: "main",
   BASE_URL_TECHNOLOGIES:
     "https://github.com/AndriiKot/iconsSVG_and_linksDocs/blob/main/svg/",
-  BASE_URL_PROJECT: "https://www.freecodecamp.org/learn/2022/responsive-web-design/learn-css-grid-by-building-a-magazine/",
+  BASE_URL_PROJECT: "https://www.freecodecamp.org/learn/2022/responsive-web-design/learn-html-by-building-a-cat-photo-app/",
 };
 
 module.exports = README_CONFIG;
