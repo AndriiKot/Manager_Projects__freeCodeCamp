@@ -6,8 +6,13 @@ const config = require("./config");
 const technologiesDocsLinks = require("./technologies/docs_links.json");
 const technologiesSvg = require("./technologies/technologies_svg.json");
 
+
 // ParserFreeCodeCamp
 const puppeteer = require("puppeteer");
+
+
+//utils
+const { writeFileSync: writeTitle } = require("./writeFileSync.js");
 
 function writeTitle(newContent) {
   try {
@@ -41,7 +46,7 @@ function writeTitle(newContent) {
   await browser.close();
 
   console.log(description);
-  writeTitle(description);
+  writeTitle(LAST_STEP_PATH, "title.txt", description);
 
   const last_description_task = readDescriptionTask();
   const title = cleanText(last_description_task);
