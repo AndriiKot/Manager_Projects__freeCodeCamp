@@ -26,7 +26,7 @@ function writeTitle(newContent) {
   await page.goto(
     path.join(
       config.BASE_URL_PROJECT,
-      `/step-${getNumberStep(LAST_STEP_FOLDER)}`
+     `step-${+getNumberStep(LAST_STEP_FOLDER)}`
     )
   );
 
@@ -55,7 +55,7 @@ function writeTitle(newContent) {
       `${createNumberStepHeader(LAST_STEP_FOLDER)}\n\n${last_description_task}`
     ),
     generateImagePreview(base_url, 4, getFiles(folderImagesPreviews).at(-1)),
-    back_to_top,
+//    back_to_top,
     generateTableTechnologies(config.TECHNOLOGIES, 33, 100, 100, 100),
     back_to_top,
     generateCodesProject(),
