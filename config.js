@@ -1,5 +1,5 @@
 const README_CONFIG = {
-  README_TOPIC: "\n# Building a Calorie Counter\n",
+  README_TOPIC: "\n# Calorie Counter\n",
   TECHNOLOGIES: ["JavaScript", "CSS", "HTML5"],
   LINKS_TO_DOCS_TECHNOLOGIES: "technologies/docs_links.json",
   FILES: ["index.html", "styles.css", "script.js"],
