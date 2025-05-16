@@ -1,6 +1,6 @@
 const README_CONFIG = {
   README_TOPIC: "\n# Calorie Counter\n",
-  TECHNOLOGIES: ["JavaScript", "CSS", "HTML5"],
+  TECHNOLOGIES: ["JavaScript", "CSS", "HTML5", "DOM"],
   LINKS_TO_DOCS_TECHNOLOGIES: "technologies/docs_links.json",
   FILES: ["index.html", "styles.css", "script.js"],
   top_page: "\n<a id=top></a>\n",
