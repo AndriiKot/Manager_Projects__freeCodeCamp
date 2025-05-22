@@ -81,7 +81,7 @@ const back_to_top = config.back_to_top_page;
 const base_url = config.BASE_URL;
 const base_url_technologies = config.BASE_URL_TECHNOLOGIES;
 
-const table = generateTable(base_url, getFolders(folderSteps), 5);
+const table = generateTable(base_url, getFolders(folderSteps), 10);
 
 function getLastFolderStep(folders) {
   return folders.at(-1);
