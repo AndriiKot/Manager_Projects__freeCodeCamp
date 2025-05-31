@@ -16,33 +16,46 @@ const {
   getLastFolder,
 } = require("./utilsFilesOperation.js");
 
+// error
+const { logParsingErrorAndRethrow } = require("./errorLogger.js");
+
 function getNumberStep(folder) {
   return folder.replace(/\D/g, "");
 }
 
-webParser(
-  "https://www.freecodecamp.org/learn/responsive-web-design/applied-visual-design/create-visual-balance-using-the-text-align-property",
-  "[id='content-start']"
-)
-  .then((res) => {
-    console.log("Step 1", res);
-    return webParser(
-      "https://www.freecodecamp.org/learn/responsive-web-design/applied-visual-design/create-visual-balance-using-the-text-align-property",
-      "[id='content-start']"
-    );
-  })
-  .then((res) => {
-    console.log("Step 2", res);
-    return webParser(
-      "https://www.freecodecamp.org/learn/responsive-web-design/applied-visual-design/create-visual-balance-using-the-text-align-property",
-      "[id='content-start']"
-    );
-  })
-  .then((res) => {
-    console.log("Step 3", res);
+const getDescriptionTask = (url, id) => {
+  return webParser(url, id)
+    .then((res) => res)
+    .catch((error) => {
+      return logParsingErrorAndRethrow(url, id, error);
+    });
+};
+
+const getH1Task = (url, id) => {
+  return webParser(url, id)
+    .then((res) => res)
+    .catch((error) => {
+      return logParsingErrorAndRethrow(url, id, error);
+    });
+};
+
+Promise.all([
+  getH1Task(
+    "https://www.freecodecamp.org/learn/responsive-web-design/applied-visual-design/create-visual-balance-using-the-text-align-property",
+    "[id='content-start']"
+  ),
+  getDescriptionTask(
+    "https://www.freecodecamp.org/learn/responsive-web-design/applied-visual-design/create-visual-balance-using-the-text-align-property",
+    "[id='description']"
+  ),
+])
+  .then(([h1Result, descriptionResult]) => {
+    console.log("H1 Result:", h1Result);
+    console.log("Description Result:", descriptionResult);
   })
   .catch((error) => {
     console.error("Error:", error);
+    process.exit(1);
   });
 
 // (async () => {
