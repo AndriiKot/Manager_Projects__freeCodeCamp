@@ -6,19 +6,44 @@ const config = require("./config");
 const technologiesDocsLinks = require("./technologies/docs_links.json");
 const technologiesSvg = require("./technologies/technologies_svg.json");
 
-
 // puppeteer
 const { webParser } = require("./parserWeb.js");
 
 //utils
-const { writeFileSync: writeTitle,
-        getFiles,
-        getLastFolder,
-      } = require("./utilsFilesOperation.js");
+const {
+  writeFileSync: writeTitle,
+  getFiles,
+  getLastFolder,
+} = require("./utilsFilesOperation.js");
 
 function getNumberStep(folder) {
   return folder.replace(/\D/g, "");
 }
+
+webParser(
+  "https://www.freecodecamp.org/learn/responsive-web-design/applied-visual-design/create-visual-balance-using-the-text-align-property",
+  "[id='content-start']"
+)
+  .then((res) => {
+    console.log("Step 1", res);
+    return webParser(
+      "https://www.freecodecamp.org/learn/responsive-web-design/applied-visual-design/create-visual-balance-using-the-text-align-property",
+      "[id='content-start']"
+    );
+  })
+  .then((res) => {
+    console.log("Step 2", res);
+    return webParser(
+      "https://www.freecodecamp.org/learn/responsive-web-design/applied-visual-design/create-visual-balance-using-the-text-align-property",
+      "[id='content-start']"
+    );
+  })
+  .then((res) => {
+    console.log("Step 3", res);
+  })
+  .catch((error) => {
+    console.error("Error:", error);
+  });
 
 // (async () => {
 //   const browser = await puppeteer.launch();
@@ -83,7 +108,6 @@ function getNumberStep(folder) {
 
 // const table = generateTable(base_url, getFolders(folderSteps), 5);
 
-
 // function readDescriptionTask() {
 //   let task = fs.readFileSync(path.join(LAST_STEP_PATH, "title.txt"), {
 //     encoding: "utf8",
@@ -137,7 +161,6 @@ function getNumberStep(folder) {
 //   return cleanedText;
 // }
 
-
 // function createNumberStepHeader(folder) {
 //   return `<h3>Step  ${+folder.replace(/\D/g, "")}</h3>`;
 // }
@@ -186,7 +209,6 @@ function getNumberStep(folder) {
 //     <img src="${normalizeUrl}" alt="${alt}">
 //   `;
 // }
-
 
 // function generateDetailsTemplate(title, content) {
 //   return `\n<details>
