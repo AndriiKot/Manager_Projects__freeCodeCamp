@@ -1,9 +1,6 @@
 "use strict";
 
-const baseUrl =
-  "https://www.freecodecamp.org/learn/responsive-web-design/applied-visual-design/";
-
-const RELATIVE_URL = [
+const RELATIVE_URLS = [
   "create-visual-balance-using-the-text-align-property",
   "adjust-the-width-of-an-element-using-the-width-property",
   "adjust-the-height-of-an-element-using-the-height-property",
@@ -59,5 +56,5 @@ const RELATIVE_URL = [
 ];
 
 module.exports = {
-  RELATIVE_URL,
+  RELATIVE_URLS,
 };
