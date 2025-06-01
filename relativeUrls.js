@@ -1,6 +1,7 @@
-'use strict';
+"use strict";
 
-const baseUrl = "https://www.freecodecamp.org/learn/responsive-web-design/applied-visual-design/";
+const baseUrl =
+  "https://www.freecodecamp.org/learn/responsive-web-design/applied-visual-design/";
 
 const RELATIVE_URL = [
   "create-visual-balance-using-the-text-align-property",
@@ -54,7 +55,9 @@ const RELATIVE_URL = [
   "change-animation-timing-with-keywords",
   "learn-how-bezier-curves-work",
   "use-a-bezier-curve-to-move-a-graphic",
-  "make-motion-more-natural-using-a-bezier-curve"
-]
+  "make-motion-more-natural-using-a-bezier-curve",
+];
 
-console.log(RELATIVE_URL.length);
+module.exports = {
+  RELATIVE_URL,
+};
