@@ -1,3 +1,6 @@
 [submodule "technologies"]
     path = technologies
     url = https://github.com/AndriiKot/iconsSVG_and_linksDocs.git
+[submodule "testing"]
+	path = testing
+	url = https://github.com/AndriiKot/Desing___City_Skyline___freeCodeCamp.git
